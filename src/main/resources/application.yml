@@ -1,0 +1,23 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: incidencia-service
+
+  datasource:
+    url: jdbc:postgresql://ep-polished-moon-apxbe2xc-pooler.c-7.us-east-1.aws.neon.tech/apr_incidencia_db?sslmode=require&channel_binding=require
+    username: neondb_owner
+    password: npg_n9b1yhDLRCTN
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
