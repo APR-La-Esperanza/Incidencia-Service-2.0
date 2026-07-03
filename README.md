@@ -1,1 +1,2 @@
-# Incidencia-Service-2.0
+Incidencia-Service (puerto 8089, apr_incidencia_db)
+Responsabilidad: Gestionar incidencias reportadas por socios. Al pasar a RESUELTA, auto-asigna fechaResolucion. Entidad: Incidencia { id, socioId, tipo: TipoIncidencia, descripcion, estado: EstadoIncidencia, latitud, longitud, fechaReporte, fechaResolucion } Controller: IncidenciaController — GET con filtros (socioId, estado, tipo), POST, PUT, DELETE Service: IncidenciaService — guardar(), actualizar(), buscarPorSocioId(), buscarPorEstado(), buscarPorTipo(), validarSocioEnSocioService() Repository: IncidenciaRepository — custom: findBySocioId(), findByEstado(), findByTipo() DTOs: IncidenciaDTO, IncidenciaResponseDTO Dependencias externas: Socio-Service → GET /socios/{id} Tabla BD: incidencias
