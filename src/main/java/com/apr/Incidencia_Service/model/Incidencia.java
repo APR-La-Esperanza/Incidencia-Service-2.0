@@ -31,6 +31,15 @@ public class Incidencia {
     @Column(name = "fecha_resolucion")
     private LocalDateTime fechaResolucion;
 
+    @Column
+    private Double latitud;
+
+    @Column
+    private Double longitud;
+
+    @Column(name = "operador_id")
+    private Long operadorId;
+
     @PrePersist
     protected void onCreate() {
         if (this.fechaReporte == null) {
@@ -58,4 +67,10 @@ public class Incidencia {
     public void setFechaReporte(LocalDateTime fechaReporte) { this.fechaReporte = fechaReporte; }
     public LocalDateTime getFechaResolucion() { return fechaResolucion; }
     public void setFechaResolucion(LocalDateTime fechaResolucion) { this.fechaResolucion = fechaResolucion; }
+    public Double getLatitud() { return latitud; }
+    public void setLatitud(Double latitud) { this.latitud = latitud; }
+    public Double getLongitud() { return longitud; }
+    public void setLongitud(Double longitud) { this.longitud = longitud; }
+    public Long getOperadorId() { return operadorId; }
+    public void setOperadorId(Long operadorId) { this.operadorId = operadorId; }
 }

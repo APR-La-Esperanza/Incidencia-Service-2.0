@@ -20,6 +20,9 @@ public class IncidenciaDTO {
     private EstadoIncidencia estado;
     private LocalDateTime fechaReporte;
     private LocalDateTime fechaResolucion;
+    private Double latitud;
+    private Double longitud;
+    private Long operadorId;
 
     public IncidenciaDTO() {
     }
@@ -36,4 +39,10 @@ public class IncidenciaDTO {
     public void setFechaReporte(LocalDateTime fechaReporte) { this.fechaReporte = fechaReporte; }
     public LocalDateTime getFechaResolucion() { return fechaResolucion; }
     public void setFechaResolucion(LocalDateTime fechaResolucion) { this.fechaResolucion = fechaResolucion; }
+    public Double getLatitud() { return latitud; }
+    public void setLatitud(Double latitud) { this.latitud = latitud; }
+    public Double getLongitud() { return longitud; }
+    public void setLongitud(Double longitud) { this.longitud = longitud; }
+    public Long getOperadorId() { return operadorId; }
+    public void setOperadorId(Long operadorId) { this.operadorId = operadorId; }
 }
