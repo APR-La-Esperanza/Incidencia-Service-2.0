@@ -88,9 +88,36 @@ public class IncidenciaService {
         }
         if (dto.getFechaReporte() != null) incidencia.setFechaReporte(dto.getFechaReporte());
         if (dto.getFechaResolucion() != null) incidencia.setFechaResolucion(dto.getFechaResolucion());
-
+        incidencia.setLatitud(dto.getLatitud());
+        incidencia.setLongitud(dto.getLongitud());
+        incidencia.setOperadorId(dto.getOperadorId());
+ 
         Incidencia actualizada = repository.save(incidencia);
         return IncidenciaMapper.toResponseDTO(actualizada);
+    }
+
+    public java.util.Map<String, Object> notificarIncidencia(Long id) {
+        Incidencia incidencia = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Incidencia no encontrada con id: " + id));
+
+        java.util.Map<String, Object> notificacion = new java.util.HashMap<>();
+        notificacion.put("tipo", "NOTIFICACION_INCIDENCIA");
+        notificacion.put("socioId", incidencia.getSocioId());
+        notificacion.put("incidenciaId", incidencia.getId());
+        notificacion.put("tipoIncidencia", incidencia.getTipo());
+        notificacion.put("estado", incidencia.getEstado());
+        notificacion.put("latitud", incidencia.getLatitud());
+        notificacion.put("longitud", incidencia.getLongitud());
+        notificacion.put("operadorId", incidencia.getOperadorId());
+        notificacion.put("mensaje", String.format(
+                "Socio %d: Su reporte de tipo %s ha sido recibido. Se ha asignado al operador %d para la inspección en las coordenadas [%s, %s].",
+                incidencia.getSocioId(),
+                incidencia.getTipo(),
+                incidencia.getOperadorId() != null ? incidencia.getOperadorId() : 0,
+                incidencia.getLatitud() != null ? incidencia.getLatitud().toString() : "sin latitud",
+                incidencia.getLongitud() != null ? incidencia.getLongitud().toString() : "sin longitud"));
+        notificacion.put("simulado", true);
+        return notificacion;
     }
 
     public void eliminar(Long id) {

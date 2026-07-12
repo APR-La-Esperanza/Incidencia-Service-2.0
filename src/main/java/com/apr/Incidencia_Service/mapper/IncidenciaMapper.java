@@ -15,6 +15,9 @@ public class IncidenciaMapper {
         if (dto.getEstado() != null) incidencia.setEstado(dto.getEstado());
         if (dto.getFechaReporte() != null) incidencia.setFechaReporte(dto.getFechaReporte());
         if (dto.getFechaResolucion() != null) incidencia.setFechaResolucion(dto.getFechaResolucion());
+        incidencia.setLatitud(dto.getLatitud());
+        incidencia.setLongitud(dto.getLongitud());
+        incidencia.setOperadorId(dto.getOperadorId());
         return incidencia;
     }
 
@@ -28,6 +31,9 @@ public class IncidenciaMapper {
         dto.setEstado(incidencia.getEstado());
         dto.setFechaReporte(incidencia.getFechaReporte());
         dto.setFechaResolucion(incidencia.getFechaResolucion());
+        dto.setLatitud(incidencia.getLatitud());
+        dto.setLongitud(incidencia.getLongitud());
+        dto.setOperadorId(incidencia.getOperadorId());
         return dto;
     }
 }
