@@ -8,6 +8,7 @@ import com.apr.Incidencia_Service.model.EstadoIncidencia;
 import com.apr.Incidencia_Service.model.Incidencia;
 import com.apr.Incidencia_Service.model.TipoIncidencia;
 import com.apr.Incidencia_Service.repository.IncidenciaRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -19,6 +20,9 @@ public class IncidenciaService {
 
     private final IncidenciaRepository repository;
     private final WebClient.Builder webClientBuilder;
+
+    @Value("${service.socio.url:http://socio-service}")
+    private String socioServiceUrl;
 
     public IncidenciaService(IncidenciaRepository repository, WebClient.Builder webClientBuilder) {
         this.repository = repository;
@@ -129,7 +133,7 @@ public class IncidenciaService {
     private void validarSocioEnSocioService(Long socioId) {
         try {
             Boolean existe = webClientBuilder.build().get()
-                    .uri("http://socio-service/socios/" + socioId)
+                    .uri(socioServiceUrl + "/socios/" + socioId)
                     .retrieve()
                     .toBodilessEntity()
                     .map(response -> response.getStatusCode().is2xxSuccessful())
