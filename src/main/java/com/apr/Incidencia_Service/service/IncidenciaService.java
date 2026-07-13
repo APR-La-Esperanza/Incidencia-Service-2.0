@@ -19,14 +19,11 @@ import java.util.List;
 public class IncidenciaService {
 
     private final IncidenciaRepository repository;
-    private final WebClient.Builder webClientBuilder;
+    private final WebClient webClient;
 
-    @Value("${service.socio.url:http://socio-service}")
-    private String socioServiceUrl;
-
-    public IncidenciaService(IncidenciaRepository repository, WebClient.Builder webClientBuilder) {
+    public IncidenciaService(IncidenciaRepository repository, WebClient webClient) {
         this.repository = repository;
-        this.webClientBuilder = webClientBuilder;
+        this.webClient = webClient;
     }
 
     public List<IncidenciaResponseDTO> listarTodas() {
@@ -132,8 +129,8 @@ public class IncidenciaService {
 
     private void validarSocioEnSocioService(Long socioId) {
         try {
-            Boolean existe = webClientBuilder.build().get()
-                    .uri(socioServiceUrl + "/socios/" + socioId)
+            Boolean existe = webClient.get()
+                    .uri("/socios/" + socioId)
                     .retrieve()
                     .toBodilessEntity()
                     .map(response -> response.getStatusCode().is2xxSuccessful())
